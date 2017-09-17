@@ -1,8 +1,9 @@
 package fr.crafties.functional;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 class Fellowship {
 
@@ -13,13 +14,10 @@ class Fellowship {
     }
 
     Collection<String> findAll(Race race) {
-        Collection<String> names = new ArrayList<>();
-        for (Character character : characters) {
-            if (character.getRace().equals(race)) {
-                names.add(character.getName());
-            }
-        }
-
-        return names;
+        return characters.stream()
+                .filter(character -> character.getRace().equals(race))
+                .map(Character::getName)
+                .collect(toList());
     }
+
 }
